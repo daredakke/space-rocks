@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://dty84mckstow5"]
+
+[ext_resource type="Texture2D" uid="uid://cnm5bfi5jjhc3" path="res://assets/oil-swirl.jpg" id="1_j6d2m"]
+[ext_resource type="Shader" path="res://resources/pixelation.gdshader" id="1_s8wac"]
+[ext_resource type="Texture2D" uid="uid://di3kawbw8u4p4" path="res://assets/scanlines.png" id="2_g0317"]
+[ext_resource type="Script" path="res://scripts/background.gd" id="3_0mprg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tnigt"]
+shader = ExtResource("1_s8wac")
+shader_parameter/size_x = 0.004
+shader_parameter/size_y = 0.006
+
+[node name="Game" type="Node2D"]
+
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="PixelationShader" type="CanvasLayer" parent="Camera"]
+
+[node name="Pixelator" type="ColorRect" parent="Camera/PixelationShader"]
+material = SubResource("ShaderMaterial_tnigt")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Scanlines" type="CanvasLayer" parent="Camera"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera/Scanlines"]
+self_modulate = Color(0.9, 0.9, 0.9, 0.0980392)
+texture = ExtResource("2_g0317")
+centered = false
+
+[node name="Background" type="Sprite2D" parent="."]
+self_modulate = Color(0.168627, 0.2, 0.631373, 0.768627)
+position = Vector2(150, 150)
+rotation = -2.85012
+texture = ExtResource("1_j6d2m")
+script = ExtResource("3_0mprg")
+
+[node name="Walls" type="StaticBody2D" parent="."]
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls"]
+polygon = PackedVector2Array(10, -10, 10, 290, 290, 290, 290, 10, -21, 10, -20, -13, 311, -13, 311, 309, -15, 309, -15, -6)
