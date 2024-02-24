@@ -1,9 +1,10 @@
-[gd_scene load_steps=26 format=3 uid="uid://dty84mckstow5"]
+[gd_scene load_steps=27 format=3 uid="uid://dty84mckstow5"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_lkqmq"]
 [ext_resource type="Shader" path="res://resources/shaders/pixelation.gdshader" id="1_s8wac"]
 [ext_resource type="PackedScene" uid="uid://ds8pc3w8smpp" path="res://scenes/stats.tscn" id="2_djanj"]
 [ext_resource type="Texture2D" uid="uid://di3kawbw8u4p4" path="res://assets/scanlines.png" id="2_g0317"]
+[ext_resource type="PackedScene" uid="uid://duy8vrnpeiltv" path="res://scenes/audio.tscn" id="2_k0387"]
 [ext_resource type="PackedScene" uid="uid://cttvmi6h6yrxo" path="res://scenes/pause.tscn" id="2_t0f03"]
 [ext_resource type="Shader" path="res://resources/shaders/scrolling_nebula.gdshader" id="3_o1pwp"]
 [ext_resource type="PackedScene" uid="uid://bfmruxwsqju7q" path="res://scenes/game_over.tscn" id="4_eptct"]
@@ -95,6 +96,9 @@ shader_parameter/size_y = 0.006
 [node name="Game" type="Node2D"]
 process_mode = 3
 script = ExtResource("1_lkqmq")
+
+[node name="AudioBus" parent="." instance=ExtResource("2_k0387")]
+unique_name_in_owner = true
 
 [node name="Camera" type="Camera2D" parent="."]
 unique_name_in_owner = true
@@ -203,4 +207,9 @@ wait_time = 0.1
 
 [node name="GameOverDelay" type="Timer" parent="."]
 unique_name_in_owner = true
+one_shot = true
+
+[node name="QuitGameDelay" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.2
 one_shot = true

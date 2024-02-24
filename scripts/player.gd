@@ -2,10 +2,6 @@ class_name Player
 extends CharacterBody2D
 
 
-signal shot_fired(shots_left: int)
-signal shot_reloaded(shots_left: int)
-signal player_died
-
 const ANGULAR_SPEED: float = TAU * 2
 const MAX_SHOTS: int = 3
 
@@ -66,8 +62,8 @@ func _process(delta: float) -> void:
 		bullet.spawn(global_position, player_dir)
 		
 		_shots_left -= 1
-		
-		shot_fired.emit(_shots_left)
+
+		EventBus.shot_fired.emit(_shots_left)
 		fire_rate.start()
 		reload.start()
 
@@ -80,6 +76,9 @@ func respawn(pos: Vector2) -> void:
 
 
 func destroy() -> void:
+	fire_rate.stop()
+	reload.stop()
+	
 	is_alive = false
 	global_position = _dead_position
 	
@@ -90,11 +89,12 @@ func _on_reloaded() -> void:
 	if _shots_left < MAX_SHOTS:
 		_shots_left += 1
 		
-		shot_reloaded.emit(_shots_left)
+		EventBus.shot_reloaded.emit(_shots_left)
 		reload.start()
 
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy"):
+		EventBus.player_died.emit()
 		destroy()
-		player_died.emit()
+

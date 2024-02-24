@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://duy8vrnpeiltv"]
+
+[ext_resource type="Script" path="res://scripts/audio.gd" id="1_s04mm"]
+[ext_resource type="AudioStream" uid="uid://601lanjcjrst" path="res://assets/sfx/explosion-2.wav" id="1_tbdrg"]
+[ext_resource type="AudioStream" uid="uid://dnbxhx6nbrh8j" path="res://assets/sfx/laser-2.wav" id="2_h1kx6"]
+[ext_resource type="AudioStream" uid="uid://bdxli1hs0n13y" path="res://assets/sfx/player-death-1.wav" id="3_drwsj"]
+[ext_resource type="AudioStream" uid="uid://6fba7cwtbf1" path="res://assets/sfx/blip-1.wav" id="4_dqsyu"]
+[ext_resource type="AudioStream" uid="uid://cmj8mv0o2lpak" path="res://assets/sfx/blip-2.wav" id="4_fuosk"]
+
+[node name="AudioBus" type="Node"]
+script = ExtResource("1_s04mm")
+
+[node name="RockDestroyed" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("1_tbdrg")
+max_polyphony = 24
+bus = &"SFX"
+
+[node name="ShotFired" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_h1kx6")
+max_polyphony = 5
+bus = &"SFX"
+
+[node name="ShotReloaded" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_fuosk")
+max_polyphony = 3
+bus = &"SFX"
+
+[node name="PlayerDied" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_drwsj")
+bus = &"SFX"
+
+[node name="ButtonSelected" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_dqsyu")
+max_polyphony = 12
+bus = &"SFX"

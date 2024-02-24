@@ -28,6 +28,7 @@ var _score: int = 0:
 var _noise_i: float = 0.0
 var _shake_strength: float = 0.0
 
+@onready var audio_bus: AudioBus = %AudioBus
 @onready var camera: Camera2D = %Camera
 @onready var stats: Stats = %Stats
 @onready var pause: Control = %Pause
@@ -37,23 +38,29 @@ var _shake_strength: float = 0.0
 @onready var rock_spawner: RockSpawner = %RockSpawner
 @onready var score_gain_rate: Timer = %ScoreGainRate
 @onready var game_over_delay: Timer = %GameOverDelay
+@onready var quit_game_delay: Timer = %QuitGameDelay
 @onready var rand = RandomNumberGenerator.new()
 @onready var noise = FastNoiseLite.new()
+
+
+func _enter_tree() -> void:
+	get_tree().node_added.connect(_on_node_added)
 
 
 func _ready() -> void:
 	pause.start_new_game.connect(_start_new_game)
 	pause.continue_game.connect(_continue_game)
-	pause.quit_game.connect(_quit_game)
+	pause.quit_game.connect(_start_quit_game_delay_timer)
 	pause.fullscreen_toggled.connect(_on_toggle_fullscreen)
 	game_over.restart_game.connect(_start_new_game)
-	game_over.quit_game.connect(_quit_game)
-	player.shot_fired.connect(_player_shot_fired)
-	player.shot_reloaded.connect(_player_shot_reloaded)
-	player.player_died.connect(_player_died)
+	game_over.quit_game.connect(_start_quit_game_delay_timer)
 	score_gain_rate.timeout.connect(_gain_score)
 	game_over_delay.timeout.connect(_game_over)
+	quit_game_delay.timeout.connect(_quit_game)
 	EventBus.rock_destroyed.connect(_gain_score)
+	EventBus.shot_fired.connect(_player_shot_fired)
+	EventBus.shot_reloaded.connect(_player_shot_reloaded)
+	EventBus.player_died.connect(_player_died)
 	
 	rand.randomize()
 	noise.seed = randi()
@@ -78,6 +85,15 @@ func _process(delta: float) -> void:
 		camera.offset = _get_noise_offset(delta)
 
 
+func _on_node_added(node: Node) -> void:
+	if node is Button:
+		node.pressed.connect(_button_pressed)
+
+
+func _button_pressed() -> void:
+	audio_bus.play_button_selected()
+
+
 func _start_new_game() -> void:
 	_game_started = true
 	_game_paused = false
@@ -91,6 +107,10 @@ func _start_new_game() -> void:
 
 func _continue_game() -> void:
 	_game_paused = false
+
+
+func _start_quit_game_delay_timer() -> void:
+	quit_game_delay.start()
 
 
 func _quit_game() -> void:
