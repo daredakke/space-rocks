@@ -1,15 +1,19 @@
-[gd_resource type="Theme" load_steps=13 format=3 uid="uid://c70h03gycrl6c"]
+[gd_resource type="Theme" load_steps=14 format=3 uid="uid://c70h03gycrl6c"]
 
 [ext_resource type="Texture2D" uid="uid://luntbm85qpas" path="res://assets/checkbox-checked-white.png" id="1_npwbg"]
 [ext_resource type="FontFile" uid="uid://crnrut2paocag" path="res://assets/fonts/IBMPlexMono-SemiBold.ttf" id="1_s4jw7"]
 [ext_resource type="Texture2D" uid="uid://c0yg60yxnvgk3" path="res://assets/checkbox.png" id="2_dfcsi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lrpbe"]
+bg_color = Color(0.395652, 0.395652, 0.395652, 0.784314)
+corner_detail = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m4q7i"]
 bg_color = Color(0, 0, 0, 0.784314)
 corner_detail = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_talnf"]
-bg_color = Color(0.23, 0.23, 0.23, 0.784314)
+bg_color = Color(0.2, 0.2, 0.2, 0.784314)
 corner_detail = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xkpnt"]
@@ -35,6 +39,7 @@ bg_color = Color(0.121569, 0.121569, 0.121569, 1)
 
 [resource]
 Button/font_sizes/font_size = 24
+Button/styles/hover = SubResource("StyleBoxFlat_lrpbe")
 Button/styles/normal = SubResource("StyleBoxFlat_m4q7i")
 Button/styles/pressed = SubResource("StyleBoxFlat_talnf")
 CheckBox/icons/checked = ExtResource("1_npwbg")

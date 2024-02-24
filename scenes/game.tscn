@@ -42,7 +42,7 @@ noise_type = 3
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1lo67"]
 width = 350
-height = 300
+height = 340
 seamless = true
 noise = SubResource("FastNoiseLite_rwuo2")
 
@@ -55,7 +55,7 @@ gradient = SubResource("Gradient_5sytg")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qfig1"]
 particle_flag_disable_z = true
-emission_shape_offset = Vector3(0, -10, 0)
+emission_shape_offset = Vector3(0, -15, 0)
 emission_shape = 3
 emission_box_extents = Vector3(160, 0, 0)
 direction = Vector3(0, 1, 0)
@@ -74,7 +74,7 @@ gradient = SubResource("Gradient_2f1oc")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r4sgk"]
 particle_flag_disable_z = true
-emission_shape_offset = Vector3(0, -10, 0)
+emission_shape_offset = Vector3(0, -15, 0)
 emission_shape = 3
 emission_box_extents = Vector3(160, 0, 0)
 direction = Vector3(0, 1, 0)
@@ -114,7 +114,7 @@ texture_repeat = 2
 material = SubResource("ShaderMaterial_fwq51")
 texture = SubResource("NoiseTexture2D_1lo67")
 centered = false
-offset = Vector2(-25, 0)
+offset = Vector2(-25, -20)
 
 [node name="Stars" type="GPUParticles2D" parent="Camera/BackgroundCanvas"]
 position = Vector2(150, 0)
@@ -143,6 +143,10 @@ material = SubResource("ShaderMaterial_tnigt")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -12.25
+offset_top = -12.25
+offset_right = -12.25
+offset_bottom = -12.25
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -151,8 +155,8 @@ mouse_filter = 2
 
 [node name="Scanlines" type="Sprite2D" parent="Camera/ScanlineCanvas"]
 self_modulate = Color(0.9, 0.9, 0.9, 0.0980392)
+position = Vector2(150, 150)
 texture = ExtResource("2_g0317")
-centered = false
 
 [node name="Walls" type="StaticBody2D" parent="."]
 metadata/_edit_group_ = true
