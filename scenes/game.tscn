@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dty84mckstow5"]
+[gd_scene load_steps=28 format=3 uid="uid://dty84mckstow5"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_lkqmq"]
 [ext_resource type="Shader" path="res://resources/shaders/pixelation.gdshader" id="1_s8wac"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dspdk4av2v2rr" path="res://scenes/player.tscn" id="5_jte11"]
 [ext_resource type="Texture2D" uid="uid://c4e7kni8phy6s" path="res://assets/star-tiny.png" id="5_s2sq7"]
 [ext_resource type="PackedScene" uid="uid://cgdpk1ansxy1f" path="res://scenes/rock_spawner.tscn" id="11_8smje"]
+[ext_resource type="PackedScene" uid="uid://bx4lg1r3jsypf" path="res://scenes/crosshair.tscn" id="11_16cgc"]
 
 [sub_resource type="Gradient" id="Gradient_3ob87"]
 offsets = PackedFloat32Array(0.0802395, 0.25988, 0.451497)
@@ -179,6 +180,10 @@ metadata/_edit_lock_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls"]
 polygon = PackedVector2Array(5, -10, 5, 295, 295, 295, 295, 20, -21, 20, -20, -13, 311, -13, 311, 309, -15, 309, -15, -6)
+
+[node name="Crosshair" parent="." instance=ExtResource("11_16cgc")]
+unique_name_in_owner = true
+z_index = 30
 
 [node name="Player" parent="." instance=ExtResource("5_jte11")]
 unique_name_in_owner = true

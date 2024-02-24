@@ -7,6 +7,7 @@
 radius = 13.0
 
 [node name="Rock" type="Area2D" groups=["enemy"]]
+z_index = 20
 script = ExtResource("1_ghh0d")
 
 [node name="RockSprite" type="Sprite2D" parent="."]

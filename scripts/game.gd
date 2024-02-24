@@ -33,6 +33,7 @@ var _shake_strength: float = 0.0
 @onready var stats: Stats = %Stats
 @onready var pause: Control = %Pause
 @onready var game_over: GameOver = %GameOver
+@onready var crosshair: Crosshair = %Crosshair
 @onready var player: Player = %Player
 @onready var player_spawn_point: Marker2D = %PlayerSpawnPoint
 @onready var rock_spawner: RockSpawner = %RockSpawner
@@ -102,6 +103,7 @@ func _start_new_game() -> void:
 	player.respawn(player_spawn_point.global_position)
 	score_gain_rate.start()
 	stats.toggle_shot_indicators(player.MAX_SHOTS)
+	crosshair.randomise_rotation()
 	rock_spawner.reset()
 	rock_spawner.start_spawning()
 
@@ -123,6 +125,8 @@ func _game_over() -> void:
 	rock_spawner.stop_spawning()
 	game_over.update_score_label(_score, MAX_SCORE)
 	game_over.show()
+	DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_VISIBLE)
+	crosshair.hide()
 
 
 func _handle_pause_state() -> void:
@@ -130,8 +134,12 @@ func _handle_pause_state() -> void:
 	
 	if _game_paused:
 		pause.show()
+		DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_VISIBLE)
+		crosshair.hide()
 	else:
 		pause.hide()
+		DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_HIDDEN)
+		crosshair.show()
 
 
 func _gain_score(value: int = 1) -> void:

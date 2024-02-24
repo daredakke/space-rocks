@@ -15,6 +15,7 @@ var player_direction: Vector2
 var _target_angle: float
 var _dead_position := Vector2(150, -50)
 var _shots_left: int = MAX_SHOTS
+var _explosion_scene: PackedScene = preload("res://scenes/explosion.tscn")
 
 @onready var bullet_spawn: Marker2D = %BulletSpawn
 @onready var hitbox_sprite: Sprite2D = %HitboxSprite
@@ -96,6 +97,12 @@ func _on_reloaded() -> void:
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy"):
+		var explosion := _explosion_scene.instantiate() as Sprite2D
+		explosion.global_position = global_position
+		explosion.scale = scale * 2
+		
+		add_sibling(explosion)
+		
 		EventBus.player_died.emit()
 		destroy()
 
