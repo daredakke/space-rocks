@@ -2,8 +2,6 @@ class_name Stats
 extends Control
 
 
-const MAX_SCORE: int = 9999999
-
 @onready var score_label: RichTextLabel = %ScoreLabel
 @onready var shot_indicator_1: TextureRect = %ShotIndicator1
 @onready var shot_indicator_2: TextureRect = %ShotIndicator2
@@ -13,10 +11,6 @@ const MAX_SCORE: int = 9999999
 	shot_indicator_2,
 	shot_indicator_3,
 ]
-
-
-func _ready() -> void:
-	update_score_label(0)
 
 
 func toggle_shot_indicators(visible_count: int) -> void:
@@ -29,5 +23,5 @@ func toggle_shot_indicators(visible_count: int) -> void:
 		shot_indicators[i].visible = true
 
 
-func update_score_label(value: int) -> void:
-	score_label.text = "[right]" + Utils.format_integer(clampi(value, 0, MAX_SCORE))
+func update_score_label(value: int, max_score: int) -> void:
+	score_label.text = "[right]" + Utils.format_integer(clampi(value, 0, max_score))

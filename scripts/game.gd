@@ -2,11 +2,19 @@ class_name Game
 extends Node2D
 
 
+const MAX_SCORE: int = 9999999
 const NOISE_SHAKE_SPEED: float = 30.0
 const SHAKE_STRENGTH: float = 8.25
 const SHAKE_DECAY_RATE: float = 10
 
-var _game_started: bool = false
+var _game_started: bool:
+	set(new_value):
+		_game_started = new_value
+		
+		if _game_started:
+			stats.show()
+		else:
+			stats.hide()
 var _game_paused: bool:
 	set(new_value):
 		_game_paused = new_value
@@ -19,9 +27,11 @@ var _shake_strength: float = 0.0
 @onready var camera: Camera2D = %Camera
 @onready var stats: Stats = %Stats
 @onready var pause: Control = %Pause
+@onready var game_over: GameOver = %GameOver
 @onready var player: Player = %Player
 @onready var player_spawn_point: Marker2D = %PlayerSpawnPoint
 @onready var score_gain_rate: Timer = %ScoreGainRate
+@onready var game_over_delay: Timer = %GameOverDelay
 @onready var rand = RandomNumberGenerator.new()
 @onready var noise = FastNoiseLite.new()
 
@@ -31,14 +41,19 @@ func _ready() -> void:
 	pause.continue_game.connect(_continue_game)
 	pause.quit_game.connect(_quit_game)
 	pause.fullscreen_toggled.connect(_on_toggle_fullscreen)
+	game_over.restart_game.connect(_start_new_game)
 	player.shot_fired.connect(_player_shot_fired)
 	player.shot_reloaded.connect(_player_shot_reloaded)
+	player.player_died.connect(_player_died)
 	score_gain_rate.timeout.connect(_gain_score)
+	game_over_delay.timeout.connect(_game_over)
 	
 	rand.randomize()
 	noise.seed = randi()
 	noise.frequency = 0.5
+	_game_started = false
 	_game_paused = true
+	stats.update_score_label(_score, MAX_SCORE)
 	
 	player.destroy()
 
@@ -73,6 +88,13 @@ func _quit_game() -> void:
 	get_tree().quit()
 
 
+func _game_over() -> void:
+	# Stop spawning enemies
+	
+	game_over.update_score_label(_score, MAX_SCORE)
+	game_over.show()
+
+
 func _handle_pause_state() -> void:
 	get_tree().paused = _game_paused
 	
@@ -85,7 +107,7 @@ func _handle_pause_state() -> void:
 func _gain_score() -> void:
 	_score += 1
 	
-	stats.update_score_label(_score)
+	stats.update_score_label(_score, MAX_SCORE)
 
 
 func _player_shot_fired(shots_left: int) -> void:
@@ -96,6 +118,10 @@ func _player_shot_fired(shots_left: int) -> void:
 
 func _player_shot_reloaded(shots_left: int) -> void:
 	stats.toggle_shot_indicators(shots_left)
+
+
+func _player_died() -> void:
+	game_over_delay.start()
 
 
 func _apply_noise_shake(strength: float) -> void:

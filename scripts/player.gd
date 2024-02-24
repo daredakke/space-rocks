@@ -4,6 +4,7 @@ extends CharacterBody2D
 
 signal shot_fired(shots_left: int)
 signal shot_reloaded(shots_left: int)
+signal player_died
 
 const ANGULAR_SPEED: float = TAU * 2
 const MAX_SHOTS: int = 3
@@ -73,12 +74,14 @@ func _process(delta: float) -> void:
 func respawn(pos: Vector2) -> void:
 	is_alive = true
 	global_position = pos
+	
 	set_process(true)
 
 
 func destroy() -> void:
 	is_alive = false
 	global_position = _dead_position
+	
 	set_process(false)
 
 
