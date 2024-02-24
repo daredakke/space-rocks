@@ -67,7 +67,19 @@ func _process(delta: float) -> void:
 		reload.start()
 
 
-func _on_reloaded():
+func respawn(pos: Vector2) -> void:
+	is_alive = true
+	global_position = pos
+	set_process(true)
+
+
+func destroy() -> void:
+	is_alive = false
+	global_position = _dead_position
+	set_process(false)
+
+
+func _on_reloaded() -> void:
 	if _shots_left < MAX_SHOTS:
 		_shots_left += 1
 		

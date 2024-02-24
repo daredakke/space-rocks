@@ -2,7 +2,7 @@ class_name PlayerBullet
 extends PoolItem
 
 
-var speed: float = 300
+var speed: float = 500
 
 
 func _process(delta) -> void:

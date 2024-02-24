@@ -1,5 +1,6 @@
-[gd_scene load_steps=21 format=3 uid="uid://dty84mckstow5"]
+[gd_scene load_steps=22 format=3 uid="uid://dty84mckstow5"]
 
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_lkqmq"]
 [ext_resource type="Shader" path="res://resources/pixelation.gdshader" id="1_s8wac"]
 [ext_resource type="Texture2D" uid="uid://di3kawbw8u4p4" path="res://assets/scanlines.png" id="2_g0317"]
 [ext_resource type="Shader" path="res://resources/scrolling_nebula.gdshader" id="3_o1pwp"]
@@ -88,8 +89,10 @@ gravity = Vector3(0, 0, 0)
 color_ramp = SubResource("GradientTexture1D_3xelw")
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_lkqmq")
 
 [node name="Camera" type="Camera2D" parent="."]
+unique_name_in_owner = true
 anchor_mode = 0
 
 [node name="PixelationCanvas" type="CanvasLayer" parent="Camera"]
@@ -111,6 +114,7 @@ centered = false
 
 [node name="BackgroundCanvas" type="CanvasLayer" parent="Camera"]
 layer = -10
+follow_viewport_enabled = true
 
 [node name="Noise" type="Sprite2D" parent="Camera/BackgroundCanvas"]
 texture_repeat = 2
@@ -147,7 +151,8 @@ metadata/_edit_lock_ = true
 polygon = PackedVector2Array(10, -10, 10, 290, 290, 290, 290, 10, -21, 10, -20, -13, 311, -13, 311, 309, -15, 309, -15, -6)
 
 [node name="Player" parent="." instance=ExtResource("5_jte11")]
-position = Vector2(146, 153)
+unique_name_in_owner = true
+position = Vector2(66, 241)
 
 [node name="KillPlane" type="Area2D" parent="." groups=["kill_plane"]]
 metadata/_edit_group_ = true
@@ -155,3 +160,7 @@ metadata/_edit_lock_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="KillPlane"]
 polygon = PackedVector2Array(-50, -50, -50, 350, 350, 350, 350, -50, -50, -50, -100, -100, 400, -100, 400, 400, -100, 400, -100, -100)
+
+[node name="PlayerSpawnPoint" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(150, 222)
