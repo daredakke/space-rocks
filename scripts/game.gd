@@ -20,7 +20,11 @@ var _game_paused: bool:
 		_game_paused = new_value
 		_handle_pause_state()
 var _is_fullscreen: bool = false
-var _score: int = 0
+var _score: int = 0:
+	set(new_value):
+		_score = new_value
+		
+		stats.update_score_label(_score, MAX_SCORE)
 var _noise_i: float = 0.0
 var _shake_strength: float = 0.0
 
@@ -30,6 +34,7 @@ var _shake_strength: float = 0.0
 @onready var game_over: GameOver = %GameOver
 @onready var player: Player = %Player
 @onready var player_spawn_point: Marker2D = %PlayerSpawnPoint
+@onready var rock_spawner: RockSpawner = %RockSpawner
 @onready var score_gain_rate: Timer = %ScoreGainRate
 @onready var game_over_delay: Timer = %GameOverDelay
 @onready var rand = RandomNumberGenerator.new()
@@ -42,11 +47,13 @@ func _ready() -> void:
 	pause.quit_game.connect(_quit_game)
 	pause.fullscreen_toggled.connect(_on_toggle_fullscreen)
 	game_over.restart_game.connect(_start_new_game)
+	game_over.quit_game.connect(_quit_game)
 	player.shot_fired.connect(_player_shot_fired)
 	player.shot_reloaded.connect(_player_shot_reloaded)
 	player.player_died.connect(_player_died)
 	score_gain_rate.timeout.connect(_gain_score)
 	game_over_delay.timeout.connect(_game_over)
+	EventBus.rock_destroyed.connect(_gain_score)
 	
 	rand.randomize()
 	noise.seed = randi()
@@ -77,6 +84,9 @@ func _start_new_game() -> void:
 	_score = 0
 	
 	player.respawn(player_spawn_point.global_position)
+	score_gain_rate.start()
+	rock_spawner.reset()
+	rock_spawner.start_spawning()
 
 
 func _continue_game() -> void:
@@ -104,10 +114,8 @@ func _handle_pause_state() -> void:
 		pause.hide()
 
 
-func _gain_score() -> void:
-	_score += 1
-	
-	stats.update_score_label(_score, MAX_SCORE)
+func _gain_score(value: int = 1) -> void:
+	_score += value
 
 
 func _player_shot_fired(shots_left: int) -> void:
@@ -121,6 +129,8 @@ func _player_shot_reloaded(shots_left: int) -> void:
 
 
 func _player_died() -> void:
+	rock_spawner.stop_spawning()
+	score_gain_rate.stop()
 	game_over_delay.start()
 
 

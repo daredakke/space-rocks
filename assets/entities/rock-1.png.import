@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4xiyljw7pw5b"
-path="res://.godot/imported/arrow-small.png-0f70ad9888ede2757c193eda7d227cfd.ctex"
+uid="uid://c4bni1bip8csu"
+path="res://.godot/imported/rock-1.png-d80fe32e023215c81ef2e26536a38b1a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/arrow-small.png"
-dest_files=["res://.godot/imported/arrow-small.png-0f70ad9888ede2757c193eda7d227cfd.ctex"]
+source_file="res://assets/entities/rock-1.png"
+dest_files=["res://.godot/imported/rock-1.png-d80fe32e023215c81ef2e26536a38b1a.ctex"]
 
 [params]
 

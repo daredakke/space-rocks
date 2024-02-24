@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgdpk1ansxy1f"]
+
+[ext_resource type="Script" path="res://scripts/rock_spawner.gd" id="1_2nyn7"]
+[ext_resource type="PackedScene" uid="uid://bsiw6s1tytjnv" path="res://scenes/pool.tscn" id="2_4qt8t"]
+[ext_resource type="PackedScene" uid="uid://coegemagdbean" path="res://scenes/rock.tscn" id="3_6cn03"]
+
+[node name="RockSpawner" type="Node2D"]
+script = ExtResource("1_2nyn7")
+
+[node name="Pool" parent="." instance=ExtResource("2_4qt8t")]
+unique_name_in_owner = true
+initial_spawn = 100
+node = ExtResource("3_6cn03")
+
+[node name="SpawnDelay" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 2.0
+
+[node name="DifficultyIncreaseDelay" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 6.0

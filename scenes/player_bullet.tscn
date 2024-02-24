@@ -1,18 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://b0jb5j5g4ei4v"]
 
-[ext_resource type="Texture2D" uid="uid://bmukxfpddfpcw" path="res://assets/circle-white-24.png" id="1_lsyhl"]
 [ext_resource type="Script" path="res://scripts/player_bullet.gd" id="1_pt58n"]
+[ext_resource type="Texture2D" uid="uid://bmukxfpddfpcw" path="res://assets/entities/circle-white-24.png" id="2_l1xhc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iugbq"]
 radius = 3.0
 
-[node name="PlayerBullet" type="Area2D"]
+[node name="PlayerBullet" type="Area2D" groups=["player_bullet"]]
 process_mode = 1
 script = ExtResource("1_pt58n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_lsyhl")
+texture = ExtResource("2_l1xhc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_iugbq")

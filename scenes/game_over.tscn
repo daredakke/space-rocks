@@ -66,9 +66,24 @@ bbcode_enabled = true
 text = "[center]999,999,999"
 fit_content = true
 
-[node name="RestartButton" type="Button" parent="Panel/MarginContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="RestartButton" type="Button" parent="Panel/MarginContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
+focus_neighbor_top = NodePath("../QuitButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
 mouse_default_cursor_shape = 2
 text = "NEW GAME"
+
+[node name="QuitButton" type="Button" parent="Panel/MarginContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+focus_neighbor_top = NodePath("../RestartButton")
+focus_neighbor_bottom = NodePath("../RestartButton")
+mouse_default_cursor_shape = 2
+text = "QUIT"

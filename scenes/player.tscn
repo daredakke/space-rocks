@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://dspdk4av2v2rr"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_bac0p"]
-[ext_resource type="Texture2D" uid="uid://c4xiyljw7pw5b" path="res://assets/arrow-small.png" id="1_d3j4e"]
-[ext_resource type="Texture2D" uid="uid://bmukxfpddfpcw" path="res://assets/circle-white-24.png" id="2_fgu1b"]
+[ext_resource type="Texture2D" uid="uid://c4xiyljw7pw5b" path="res://assets/entities/arrow-small.png" id="2_mdfnb"]
+[ext_resource type="Texture2D" uid="uid://bmukxfpddfpcw" path="res://assets/entities/circle-white-24.png" id="3_6n625"]
 [ext_resource type="PackedScene" uid="uid://bsiw6s1tytjnv" path="res://scenes/pool.tscn" id="4_bwlfg"]
 [ext_resource type="PackedScene" uid="uid://b0jb5j5g4ei4v" path="res://scenes/player_bullet.tscn" id="5_av3pv"]
 
@@ -22,7 +22,7 @@ modulate = Color(0.976471, 0.286275, 0.286275, 1)
 position = Vector2(4, -8.88178e-16)
 rotation = 4.71239
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("1_d3j4e")
+texture = ExtResource("2_mdfnb")
 
 [node name="WallCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_wvxxc")
@@ -37,7 +37,7 @@ position = Vector2(7, 0)
 unique_name_in_owner = true
 position = Vector2(-2.98023e-08, -2.98023e-08)
 scale = Vector2(0.333333, 0.333333)
-texture = ExtResource("2_fgu1b")
+texture = ExtResource("3_6n625")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_aeie4")
@@ -55,3 +55,5 @@ one_shot = true
 [node name="Reload" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

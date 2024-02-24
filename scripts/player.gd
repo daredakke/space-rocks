@@ -9,7 +9,7 @@ signal player_died
 const ANGULAR_SPEED: float = TAU * 2
 const MAX_SHOTS: int = 3
 
-@export_range(100, 1000) var player_speed: float = 500.0
+@export_range(100, 1000) var player_speed: float = 400.0
 @export_range(0.1, 2.0) var shot_fire_rate: float = 0.33
 @export_range(0.1, 2.0) var reload_rate: float = 1.0
 
@@ -58,6 +58,7 @@ func _process(delta: float) -> void:
 	var angle_diff: float = wrapf(_target_angle - rotation, -PI, PI)
 	rotation += clamp(ANGULAR_SPEED * delta, 0, abs(angle_diff)) * sign(angle_diff)
 	
+	# Firing
 	if Input.is_action_pressed("fire") and fire_rate.is_stopped() and _shots_left > 0:
 		var player_dir: Vector2 = (get_global_mouse_position() - position).normalized()
 		
@@ -91,3 +92,9 @@ func _on_reloaded() -> void:
 		
 		shot_reloaded.emit(_shots_left)
 		reload.start()
+
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	if area.is_in_group("enemy"):
+		destroy()
+		player_died.emit()

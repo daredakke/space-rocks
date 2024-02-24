@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://coegemagdbean"]
+
+[ext_resource type="Script" path="res://scripts/rock.gd" id="1_ghh0d"]
+[ext_resource type="Texture2D" uid="uid://cbo10igff8aay" path="res://assets/entities/rocks.png" id="2_q6lbn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cm8jd"]
+radius = 13.0
+
+[node name="Rock" type="Area2D" groups=["enemy"]]
+script = ExtResource("1_ghh0d")
+
+[node name="RockSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_q6lbn")
+hframes = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cm8jd")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
