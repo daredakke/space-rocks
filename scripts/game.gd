@@ -33,6 +33,7 @@ var _shake_strength: float = 0.0
 @onready var stats: Stats = %Stats
 @onready var pause: Control = %Pause
 @onready var game_over: GameOver = %GameOver
+@onready var fade_out: FadeOut = %FadeOut
 @onready var crosshair: Crosshair = %Crosshair
 @onready var player: Player = %Player
 @onready var player_spawn_point: Marker2D = %PlayerSpawnPoint
@@ -122,7 +123,6 @@ func _quit_game() -> void:
 
 
 func _game_over() -> void:
-	rock_spawner.stop_spawning()
 	game_over.update_score_label(_score, MAX_SCORE)
 	game_over.show()
 	DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_VISIBLE)
@@ -157,6 +157,8 @@ func _player_shot_reloaded(shots_left: int) -> void:
 
 
 func _player_died() -> void:
+	fade_out.play()
+	rock_spawner.stop_spawning()
 	_apply_noise_shake(SHAKE_STRENGTH * 2.5)
 	rock_spawner.stop_spawning()
 	score_gain_rate.stop()
