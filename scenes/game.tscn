@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dty84mckstow5"]
+[gd_scene load_steps=7 format=3 uid="uid://dty84mckstow5"]
 
 [ext_resource type="Texture2D" uid="uid://cnm5bfi5jjhc3" path="res://assets/oil-swirl.jpg" id="1_j6d2m"]
 [ext_resource type="Shader" path="res://resources/pixelation.gdshader" id="1_s8wac"]
 [ext_resource type="Texture2D" uid="uid://di3kawbw8u4p4" path="res://assets/scanlines.png" id="2_g0317"]
 [ext_resource type="Script" path="res://scripts/background.gd" id="3_0mprg"]
+[ext_resource type="PackedScene" uid="uid://dspdk4av2v2rr" path="res://scenes/player.tscn" id="5_jte11"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tnigt"]
 shader = ExtResource("1_s8wac")
@@ -15,9 +16,9 @@ shader_parameter/size_y = 0.006
 [node name="Camera" type="Camera2D" parent="."]
 anchor_mode = 0
 
-[node name="PixelationShader" type="CanvasLayer" parent="Camera"]
+[node name="PixelationCanvas" type="CanvasLayer" parent="Camera"]
 
-[node name="Pixelator" type="ColorRect" parent="Camera/PixelationShader"]
+[node name="PixelationShader" type="ColorRect" parent="Camera/PixelationCanvas"]
 material = SubResource("ShaderMaterial_tnigt")
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,9 +26,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Scanlines" type="CanvasLayer" parent="Camera"]
+[node name="ScanlineCanvas" type="CanvasLayer" parent="Camera"]
 
-[node name="Sprite2D" type="Sprite2D" parent="Camera/Scanlines"]
+[node name="Scanlines" type="Sprite2D" parent="Camera/ScanlineCanvas"]
 self_modulate = Color(0.9, 0.9, 0.9, 0.0980392)
 texture = ExtResource("2_g0317")
 centered = false
@@ -45,3 +46,6 @@ metadata/_edit_lock_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls"]
 polygon = PackedVector2Array(10, -10, 10, 290, 290, 290, 290, 10, -21, 10, -20, -13, 311, -13, 311, 309, -15, 309, -15, -6)
+
+[node name="Player" parent="." instance=ExtResource("5_jte11")]
+position = Vector2(146, 153)
