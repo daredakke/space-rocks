@@ -1,0 +1,22 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://c70h03gycrl6c"]
+
+[ext_resource type="FontFile" uid="uid://crnrut2paocag" path="res://assets/fonts/IBMPlexMono-SemiBold.ttf" id="1_s4jw7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m4q7i"]
+bg_color = Color(0, 0, 0, 0.784314)
+corner_detail = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_talnf"]
+bg_color = Color(0.23, 0.23, 0.23, 0.784314)
+corner_detail = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_acylb"]
+bg_color = Color(0.121569, 0.121569, 0.121569, 1)
+
+[resource]
+Button/font_sizes/font_size = 24
+Button/styles/normal = SubResource("StyleBoxFlat_m4q7i")
+Button/styles/pressed = SubResource("StyleBoxFlat_talnf")
+Label/font_sizes/font_size = 24
+Label/fonts/font = ExtResource("1_s4jw7")
+Panel/styles/panel = SubResource("StyleBoxFlat_acylb")

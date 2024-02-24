@@ -2,6 +2,9 @@ class_name Player
 extends CharacterBody2D
 
 
+signal shot_fired
+signal shot_reloaded
+
 const ANGULAR_SPEED: float = TAU * 2
 const MAX_SHOTS: int = 3
 
@@ -62,7 +65,7 @@ func _process(delta: float) -> void:
 		
 		_shots_left -= 1
 		
-		EventBus.shot_fired.emit()
+		shot_fired.emit()
 		fire_rate.start()
 		reload.start()
 
@@ -83,5 +86,5 @@ func _on_reloaded() -> void:
 	if _shots_left < MAX_SHOTS:
 		_shots_left += 1
 		
-		EventBus.shot_reloaded.emit()
+		shot_reloaded.emit()
 		reload.start()

@@ -1,0 +1,115 @@
+[gd_scene load_steps=5 format=3 uid="uid://cttvmi6h6yrxo"]
+
+[ext_resource type="Theme" uid="uid://c70h03gycrl6c" path="res://resources/custom.tres" id="1_3lbjt"]
+[ext_resource type="FontFile" uid="uid://bs8ecdwcjw04a" path="res://assets/fonts/IBMPlexMono-Bold.ttf" id="2_ce4l0"]
+[ext_resource type="Script" path="res://scripts/pause.gd" id="2_w22xn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s76vk"]
+bg_color = Color(0, 0, 0, 0.392157)
+
+[node name="Pause" type="Control"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+theme = ExtResource("1_3lbjt")
+script = ExtResource("2_w22xn")
+
+[node name="MainMenu" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_s76vk")
+
+[node name="Margin" type="MarginContainer" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="TitleLabel" type="Label" parent="MainMenu/Margin"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_ce4l0")
+theme_override_font_sizes/font_size = 40
+text = "SPACE ROCKS"
+horizontal_alignment = 1
+
+[node name="ButtonsVBox" type="VBoxContainer" parent="MainMenu/Margin"]
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="ContinueButton" type="Button" parent="MainMenu/Margin/ButtonsVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../QuitButton")
+mouse_default_cursor_shape = 2
+text = "CONTINUE"
+
+[node name="NewGameButton" type="Button" parent="MainMenu/Margin/ButtonsVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "NEW GAME"
+
+[node name="OptionsButton" type="Button" parent="MainMenu/Margin/ButtonsVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "OPTIONS"
+
+[node name="QuitButton" type="Button" parent="MainMenu/Margin/ButtonsVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../ContinueButton")
+mouse_default_cursor_shape = 2
+text = "QUIT"
+
+[node name="Options" type="Panel" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Options"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="OptionsLabel" type="Label" parent="Options/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_ce4l0")
+theme_override_font_sizes/font_size = 40
+text = "OPTIONS"
+
+[node name="OptionsCloseButton" type="Button" parent="Options/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+mouse_default_cursor_shape = 2
+text = "BACK"

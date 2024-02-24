@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://dty84mckstow5"]
+[gd_scene load_steps=23 format=3 uid="uid://dty84mckstow5"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_lkqmq"]
-[ext_resource type="Shader" path="res://resources/pixelation.gdshader" id="1_s8wac"]
+[ext_resource type="Shader" path="res://resources/shaders/pixelation.gdshader" id="1_s8wac"]
 [ext_resource type="Texture2D" uid="uid://di3kawbw8u4p4" path="res://assets/scanlines.png" id="2_g0317"]
-[ext_resource type="Shader" path="res://resources/scrolling_nebula.gdshader" id="3_o1pwp"]
+[ext_resource type="PackedScene" uid="uid://cttvmi6h6yrxo" path="res://scenes/pause.tscn" id="2_t0f03"]
+[ext_resource type="Shader" path="res://resources/shaders/scrolling_nebula.gdshader" id="3_o1pwp"]
 [ext_resource type="Texture2D" uid="uid://dwucqtr12dlvk" path="res://assets/star.png" id="4_jnund"]
 [ext_resource type="PackedScene" uid="uid://dspdk4av2v2rr" path="res://scenes/player.tscn" id="5_jte11"]
 [ext_resource type="Texture2D" uid="uid://c4e7kni8phy6s" path="res://assets/star-tiny.png" id="5_s2sq7"]
@@ -89,11 +90,20 @@ gravity = Vector3(0, 0, 0)
 color_ramp = SubResource("GradientTexture1D_3xelw")
 
 [node name="Game" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_lkqmq")
 
 [node name="Camera" type="Camera2D" parent="."]
 unique_name_in_owner = true
+process_mode = 3
 anchor_mode = 0
+
+[node name="UI" type="CanvasLayer" parent="Camera"]
+
+[node name="Pause" parent="Camera/UI" instance=ExtResource("2_t0f03")]
+unique_name_in_owner = true
+process_mode = 2
+visible = false
 
 [node name="PixelationCanvas" type="CanvasLayer" parent="Camera"]
 
@@ -104,6 +114,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="ScanlineCanvas" type="CanvasLayer" parent="Camera"]
 
@@ -152,6 +163,7 @@ polygon = PackedVector2Array(10, -10, 10, 290, 290, 290, 290, 10, -21, 10, -20, 
 
 [node name="Player" parent="." instance=ExtResource("5_jte11")]
 unique_name_in_owner = true
+process_mode = 1
 position = Vector2(66, 241)
 
 [node name="KillPlane" type="Area2D" parent="." groups=["kill_plane"]]
