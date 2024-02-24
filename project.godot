@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 EventBus="*res://scripts/event_bus.gd"
+Utils="*res://scripts/utils.gd"
 
 [display]
 

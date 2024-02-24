@@ -1,0 +1,76 @@
+[gd_scene load_steps=4 format=3 uid="uid://ds8pc3w8smpp"]
+
+[ext_resource type="Theme" uid="uid://c70h03gycrl6c" path="res://resources/custom.tres" id="1_ncfw6"]
+[ext_resource type="Script" path="res://scripts/stats.gd" id="2_jfiha"]
+[ext_resource type="Texture2D" uid="uid://4m4mr7ax6nxe" path="res://assets/circle-white-13.png" id="2_owcad"]
+
+[node name="Stats" type="Control"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 300.0
+offset_bottom = 300.0
+size_flags_horizontal = 8
+theme = ExtResource("1_ncfw6")
+script = ExtResource("2_jfiha")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(0, 17)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="Margin" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = -4
+theme_override_constants/margin_right = 24
+
+[node name="ScoreLabel" type="RichTextLabel" parent="Panel/Margin"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+bbcode_enabled = true
+text = "[right]4,346"
+fit_content = true
+
+[node name="ShotMargin" type="MarginContainer" parent="Panel/Margin"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="ShotHBox" type="HBoxContainer" parent="Panel/Margin/ShotMargin"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 22
+
+[node name="ShotIndicator1" type="TextureRect" parent="Panel/Margin/ShotMargin/ShotHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("2_owcad")
+expand_mode = 3
+stretch_mode = 2
+
+[node name="ShotIndicator2" type="TextureRect" parent="Panel/Margin/ShotMargin/ShotHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("2_owcad")
+expand_mode = 3
+stretch_mode = 2
+
+[node name="ShotIndicator3" type="TextureRect" parent="Panel/Margin/ShotMargin/ShotHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("2_owcad")
+expand_mode = 3
+stretch_mode = 2

@@ -1,7 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://dty84mckstow5"]
+[gd_scene load_steps=24 format=3 uid="uid://dty84mckstow5"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_lkqmq"]
 [ext_resource type="Shader" path="res://resources/shaders/pixelation.gdshader" id="1_s8wac"]
+[ext_resource type="PackedScene" uid="uid://ds8pc3w8smpp" path="res://scenes/stats.tscn" id="2_djanj"]
 [ext_resource type="Texture2D" uid="uid://di3kawbw8u4p4" path="res://assets/scanlines.png" id="2_g0317"]
 [ext_resource type="PackedScene" uid="uid://cttvmi6h6yrxo" path="res://scenes/pause.tscn" id="2_t0f03"]
 [ext_resource type="Shader" path="res://resources/shaders/scrolling_nebula.gdshader" id="3_o1pwp"]
@@ -100,6 +101,10 @@ anchor_mode = 0
 
 [node name="UI" type="CanvasLayer" parent="Camera"]
 
+[node name="Stats" parent="Camera/UI" instance=ExtResource("2_djanj")]
+unique_name_in_owner = true
+process_mode = 1
+
 [node name="Pause" parent="Camera/UI" instance=ExtResource("2_t0f03")]
 unique_name_in_owner = true
 process_mode = 2
@@ -145,8 +150,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -12.25
 offset_top = -12.25
-offset_right = -12.25
-offset_bottom = -12.25
+offset_right = 7.75
+offset_bottom = 7.75
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -180,3 +185,9 @@ polygon = PackedVector2Array(-50, -50, -50, 350, 350, 350, 350, -50, -50, -50, -
 [node name="PlayerSpawnPoint" type="Marker2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(150, 222)
+
+[node name="ScoreGainRate" type="Timer" parent="."]
+unique_name_in_owner = true
+process_mode = 1
+wait_time = 0.1
+autostart = true

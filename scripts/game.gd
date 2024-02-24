@@ -17,9 +17,11 @@ var _noise_i: float = 0.0
 var _shake_strength: float = 0.0
 
 @onready var camera: Camera2D = %Camera
+@onready var stats: Stats = %Stats
+@onready var pause: Control = %Pause
 @onready var player: Player = %Player
 @onready var player_spawn_point: Marker2D = %PlayerSpawnPoint
-@onready var pause: Control = %Pause
+@onready var score_gain_rate: Timer = %ScoreGainRate
 @onready var rand = RandomNumberGenerator.new()
 @onready var noise = FastNoiseLite.new()
 
@@ -29,7 +31,9 @@ func _ready() -> void:
 	pause.continue_game.connect(_continue_game)
 	pause.quit_game.connect(_quit_game)
 	pause.fullscreen_toggled.connect(_on_toggle_fullscreen)
-	player.shot_fired.connect(_player_shot_screen_shake)
+	player.shot_fired.connect(_player_shot_fired)
+	player.shot_reloaded.connect(_player_shot_reloaded)
+	score_gain_rate.timeout.connect(_gain_score)
 	
 	rand.randomize()
 	noise.seed = randi()
@@ -78,8 +82,20 @@ func _handle_pause_state() -> void:
 		pause.hide()
 
 
-func _player_shot_screen_shake() -> void:
+func _gain_score() -> void:
+	_score += 1
+	
+	stats.update_score_label(_score)
+
+
+func _player_shot_fired(shots_left: int) -> void:
 	_apply_noise_shake(SHAKE_STRENGTH + randf_range(0.1, 1.0))
+	
+	stats.toggle_shot_indicators(shots_left)
+
+
+func _player_shot_reloaded(shots_left: int) -> void:
+	stats.toggle_shot_indicators(shots_left)
 
 
 func _apply_noise_shake(strength: float) -> void:
