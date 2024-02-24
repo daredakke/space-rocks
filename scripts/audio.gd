@@ -14,7 +14,6 @@ func _ready() -> void:
 	EventBus.shot_fired.connect(_play_shot_fired)
 	EventBus.shot_reloaded.connect(_play_shot_reloaded)
 	EventBus.player_died.connect(_play_player_died)
-	EventBus.player_died.connect(_play_rock_destroyed)
 	rock_destroyed.finished.connect(_on_rock_destroyed_finished)
 	shot_fired.finished.connect(_on_shot_fired_finished)
 
@@ -37,6 +36,7 @@ func _play_shot_reloaded(_shots_left: int) -> void:
 
 func _play_player_died() -> void:
 	player_died.play()
+	rock_destroyed.play()
 
 
 func _on_rock_destroyed_finished() -> void:
