@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.2", "Forward Plus")
 boot_splash/show_image=false
 config/icon="res://icon.svg"
 
+[autoload]
+
+EventBus="*res://scripts/event_bus.gd"
+
 [display]
 
 window/size/viewport_width=600

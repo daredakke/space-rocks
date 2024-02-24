@@ -1,15 +1,91 @@
-[gd_scene load_steps=7 format=3 uid="uid://dty84mckstow5"]
+[gd_scene load_steps=21 format=3 uid="uid://dty84mckstow5"]
 
-[ext_resource type="Texture2D" uid="uid://cnm5bfi5jjhc3" path="res://assets/oil-swirl.jpg" id="1_j6d2m"]
 [ext_resource type="Shader" path="res://resources/pixelation.gdshader" id="1_s8wac"]
 [ext_resource type="Texture2D" uid="uid://di3kawbw8u4p4" path="res://assets/scanlines.png" id="2_g0317"]
-[ext_resource type="Script" path="res://scripts/background.gd" id="3_0mprg"]
+[ext_resource type="Shader" path="res://resources/scrolling_nebula.gdshader" id="3_o1pwp"]
+[ext_resource type="Texture2D" uid="uid://dwucqtr12dlvk" path="res://assets/star.png" id="4_jnund"]
 [ext_resource type="PackedScene" uid="uid://dspdk4av2v2rr" path="res://scenes/player.tscn" id="5_jte11"]
+[ext_resource type="Texture2D" uid="uid://c4e7kni8phy6s" path="res://assets/star-tiny.png" id="5_s2sq7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tnigt"]
 shader = ExtResource("1_s8wac")
 shader_parameter/size_x = 0.004
 shader_parameter/size_y = 0.006
+
+[sub_resource type="Gradient" id="Gradient_3ob87"]
+offsets = PackedFloat32Array(0.0802395, 0.25988, 0.451497)
+colors = PackedColorArray(0, 0, 0, 1, 0.332004, 0.378679, 0.395652, 0.819608, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5074o"]
+gradient = SubResource("Gradient_3ob87")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uj4sj"]
+noise_type = 0
+seed = 9
+frequency = 0.0035
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pmdhj"]
+width = 300
+height = 400
+generate_mipmaps = false
+seamless = true
+normalize = false
+noise = SubResource("FastNoiseLite_uj4sj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fwq51"]
+shader = ExtResource("3_o1pwp")
+shader_parameter/scroll = Vector2(0, -0.1)
+shader_parameter/overlay_scroll = Vector2(-0.01, -0.14)
+shader_parameter/overlay = SubResource("NoiseTexture2D_pmdhj")
+shader_parameter/colour_overlay = SubResource("GradientTexture1D_5074o")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rwuo2"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1lo67"]
+width = 350
+height = 300
+seamless = true
+noise = SubResource("FastNoiseLite_rwuo2")
+
+[sub_resource type="Gradient" id="Gradient_5sytg"]
+offsets = PackedFloat32Array(0, 0.0922155, 0.22994, 0.457485, 0.786826, 1)
+colors = PackedColorArray(0.56, 1, 0.985333, 0.901961, 1, 0.882667, 0.36, 0.901961, 1, 0.21, 0.21, 0.901961, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.588235)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jd6hh"]
+gradient = SubResource("Gradient_5sytg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qfig1"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -10, 0)
+emission_shape = 3
+emission_box_extents = Vector3(160, 0, 0)
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 10.0
+initial_velocity_max = 17.0
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_jd6hh")
+
+[sub_resource type="Gradient" id="Gradient_2f1oc"]
+offsets = PackedFloat32Array(0, 0.702994, 0.77485, 0.858683, 1)
+colors = PackedColorArray(1, 1, 1, 0.156863, 1, 1, 1, 0.784314, 0.53, 1, 0.9765, 0.784314, 1, 0.93, 0.4, 0.784314, 1, 0.23, 0.23, 0.784314)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3xelw"]
+gradient = SubResource("Gradient_2f1oc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r4sgk"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -10, 0)
+emission_shape = 3
+emission_box_extents = Vector3(160, 0, 0)
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 8.0
+initial_velocity_max = 14.0
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_3xelw")
 
 [node name="Game" type="Node2D"]
 
@@ -33,12 +109,35 @@ self_modulate = Color(0.9, 0.9, 0.9, 0.0980392)
 texture = ExtResource("2_g0317")
 centered = false
 
-[node name="Background" type="Sprite2D" parent="."]
-self_modulate = Color(0.168627, 0.2, 0.631373, 0.768627)
-position = Vector2(150, 150)
-rotation = -2.85012
-texture = ExtResource("1_j6d2m")
-script = ExtResource("3_0mprg")
+[node name="BackgroundCanvas" type="CanvasLayer" parent="Camera"]
+layer = -10
+
+[node name="Noise" type="Sprite2D" parent="Camera/BackgroundCanvas"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_fwq51")
+texture = SubResource("NoiseTexture2D_1lo67")
+centered = false
+offset = Vector2(-25, 0)
+
+[node name="Stars" type="GPUParticles2D" parent="Camera/BackgroundCanvas"]
+position = Vector2(150, 0)
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_qfig1")
+texture = ExtResource("4_jnund")
+lifetime = 30.0
+preprocess = 30.0
+randomness = 0.34
+fixed_fps = 60
+
+[node name="StarsSmall" type="GPUParticles2D" parent="Camera/BackgroundCanvas"]
+position = Vector2(150, 0)
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_r4sgk")
+texture = ExtResource("5_s2sq7")
+lifetime = 33.0
+preprocess = 33.0
+randomness = 0.34
+fixed_fps = 60
 
 [node name="Walls" type="StaticBody2D" parent="."]
 metadata/_edit_group_ = true
