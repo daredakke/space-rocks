@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dspdk4av2v2rr"]
+[gd_scene load_steps=8 format=3 uid="uid://dspdk4av2v2rr"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_bac0p"]
 [ext_resource type="Texture2D" uid="uid://c4xiyljw7pw5b" path="res://assets/arrow-small.png" id="1_d3j4e"]
 [ext_resource type="Texture2D" uid="uid://bmukxfpddfpcw" path="res://assets/circle-white-24.png" id="2_fgu1b"]
+[ext_resource type="PackedScene" uid="uid://bsiw6s1tytjnv" path="res://scenes/pool.tscn" id="4_bwlfg"]
+[ext_resource type="PackedScene" uid="uid://b0jb5j5g4ei4v" path="res://scenes/player_bullet.tscn" id="5_av3pv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wvxxc"]
 radius = 7.0
@@ -10,7 +12,8 @@ radius = 7.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_aeie4"]
 radius = 4.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+z_index = 10
 script = ExtResource("1_bac0p")
 player_speed = 300.0
 
@@ -38,9 +41,17 @@ texture = ExtResource("2_fgu1b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_aeie4")
+debug_color = Color(0.0862745, 0.701961, 0, 0.419608)
+
+[node name="BulletPool" parent="." instance=ExtResource("4_bwlfg")]
+unique_name_in_owner = true
+initial_spawn = 5
+node = ExtResource("5_av3pv")
 
 [node name="FireRate" type="Timer" parent="."]
 unique_name_in_owner = true
+one_shot = true
 
 [node name="Reload" type="Timer" parent="."]
 unique_name_in_owner = true
+one_shot = true
