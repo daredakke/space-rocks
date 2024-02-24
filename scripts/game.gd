@@ -119,8 +119,7 @@ func _quit_game() -> void:
 
 
 func _game_over() -> void:
-	# Stop spawning enemies
-	
+	rock_spawner.stop_spawning()
 	game_over.update_score_label(_score, MAX_SCORE)
 	game_over.show()
 
@@ -149,6 +148,7 @@ func _player_shot_reloaded(shots_left: int) -> void:
 
 
 func _player_died() -> void:
+	_apply_noise_shake(SHAKE_STRENGTH * 2.5)
 	rock_spawner.stop_spawning()
 	score_gain_rate.stop()
 	game_over_delay.start()
