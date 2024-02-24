@@ -5,7 +5,7 @@ extends CharacterBody2D
 const ANGULAR_SPEED: float = TAU * 2
 const MAX_SHOTS: int = 3
 
-@export_range(100, 1000) var player_speed: float = 400.0
+@export_range(100, 1000) var player_speed: float = 300.0
 @export_range(0.1, 2.0) var shot_fire_rate: float = 0.33
 @export_range(0.1, 2.0) var reload_rate: float = 1.0
 
@@ -19,6 +19,7 @@ var _explosion_scene: PackedScene = preload("res://scenes/explosion.tscn")
 
 @onready var bullet_spawn: Marker2D = %BulletSpawn
 @onready var hitbox_sprite: Sprite2D = %HitboxSprite
+@onready var hitbox_collision: CollisionShape2D = %HitboxCollision
 @onready var bullet_pool: Pool = %BulletPool
 @onready var fire_rate: Timer = %FireRate
 @onready var reload: Timer = %Reload
@@ -74,16 +75,17 @@ func respawn(pos: Vector2) -> void:
 	global_position = pos
 	_shots_left = MAX_SHOTS
 	
+	hitbox_collision.set_deferred("disabled", false)
 	set_process(true)
 
 
 func destroy() -> void:
-	fire_rate.stop()
-	reload.stop()
-	
 	is_alive = false
 	global_position = _dead_position
 	
+	fire_rate.stop()
+	reload.stop()
+	hitbox_collision.set_deferred("disabled", true)
 	set_process(false)
 
 

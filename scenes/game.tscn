@@ -193,6 +193,7 @@ z_index = 30
 unique_name_in_owner = true
 process_mode = 1
 position = Vector2(66, 241)
+player_speed = 250.0
 
 [node name="KillPlane" type="Area2D" parent="." groups=["kill_plane"]]
 metadata/_edit_group_ = true

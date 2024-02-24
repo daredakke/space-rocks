@@ -15,7 +15,6 @@ radius = 4.0
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 10
 script = ExtResource("1_bac0p")
-player_speed = 300.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.976471, 0.286275, 0.286275, 1)
@@ -39,7 +38,8 @@ position = Vector2(-2.98023e-08, -2.98023e-08)
 scale = Vector2(0.333333, 0.333333)
 texture = ExtResource("3_6n625")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="HitboxCollision" type="CollisionShape2D" parent="Hitbox"]
+unique_name_in_owner = true
 shape = SubResource("CircleShape2D_aeie4")
 debug_color = Color(0.0862745, 0.701961, 0, 0.419608)
 
