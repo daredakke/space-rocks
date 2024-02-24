@@ -11,6 +11,7 @@ var _game_paused: bool:
 	set(new_value):
 		_game_paused = new_value
 		_handle_pause_state()
+var _is_fullscreen: bool = false
 var _score: int = 0
 var _noise_i: float = 0.0
 var _shake_strength: float = 0.0
@@ -27,6 +28,7 @@ func _ready() -> void:
 	pause.start_new_game.connect(_start_new_game)
 	pause.continue_game.connect(_continue_game)
 	pause.quit_game.connect(_quit_game)
+	pause.fullscreen_toggled.connect(_on_toggle_fullscreen)
 	player.shot_fired.connect(_player_shot_screen_shake)
 	
 	rand.randomize()
@@ -91,3 +93,13 @@ func _get_noise_offset(delta: float) -> Vector2:
 		noise.get_noise_2d(1, _noise_i) * _shake_strength,
 		noise.get_noise_2d(100, _noise_i) * _shake_strength
 	)
+
+
+func _on_toggle_fullscreen() -> void:
+	_is_fullscreen = !_is_fullscreen
+	
+	if _is_fullscreen:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		ProjectSettings.set_setting("display/window/size/borderless", false)

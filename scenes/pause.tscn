@@ -107,9 +107,81 @@ theme_override_fonts/font = ExtResource("2_ce4l0")
 theme_override_font_sizes/font_size = 40
 text = "OPTIONS"
 
+[node name="OptionsVBox" type="VBoxContainer" parent="Options/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 8
+
+[node name="MusicLabelHBox" type="HBoxContainer" parent="Options/MarginContainer/OptionsVBox"]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="MusicLabel" type="Label" parent="Options/MarginContainer/OptionsVBox/MusicLabelHBox"]
+layout_mode = 2
+text = "MUSIC"
+
+[node name="MusicVolumeLabel" type="Label" parent="Options/MarginContainer/OptionsVBox/MusicLabelHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+text = "100%"
+horizontal_alignment = 2
+
+[node name="MusicSlider" type="HSlider" parent="Options/MarginContainer/OptionsVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../../OptionsCloseButton")
+focus_neighbor_bottom = NodePath("../SFXSlider")
+mouse_default_cursor_shape = 2
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="SFXLabelHBox" type="HBoxContainer" parent="Options/MarginContainer/OptionsVBox"]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="SFXLabel" type="Label" parent="Options/MarginContainer/OptionsVBox/SFXLabelHBox"]
+layout_mode = 2
+text = "SFX"
+
+[node name="SFXVolumeLabel" type="Label" parent="Options/MarginContainer/OptionsVBox/SFXLabelHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+text = "100%"
+horizontal_alignment = 2
+
+[node name="SFXSlider" type="HSlider" parent="Options/MarginContainer/OptionsVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../MusicSlider")
+focus_neighbor_bottom = NodePath("../FullscreenHBox/FullscreenToggle")
+mouse_default_cursor_shape = 2
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="FullscreenHBox" type="HBoxContainer" parent="Options/MarginContainer/OptionsVBox"]
+layout_mode = 2
+
+[node name="FullscreenLabel" type="Label" parent="Options/MarginContainer/OptionsVBox/FullscreenHBox"]
+layout_mode = 2
+text = "FULLSCREEN"
+
+[node name="FullscreenToggle" type="CheckBox" parent="Options/MarginContainer/OptionsVBox/FullscreenHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+focus_neighbor_top = NodePath("../../SFXSlider")
+focus_neighbor_bottom = NodePath("../../../OptionsCloseButton")
+mouse_default_cursor_shape = 2
+
 [node name="OptionsCloseButton" type="Button" parent="Options/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
+focus_neighbor_top = NodePath("../OptionsVBox/FullscreenHBox/FullscreenToggle")
+focus_neighbor_bottom = NodePath("../OptionsVBox/MusicSlider")
 mouse_default_cursor_shape = 2
 text = "BACK"

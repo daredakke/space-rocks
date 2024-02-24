@@ -9,11 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://dspdk4av2v2rr" path="res://scenes/player.tscn" id="5_jte11"]
 [ext_resource type="Texture2D" uid="uid://c4e7kni8phy6s" path="res://assets/star-tiny.png" id="5_s2sq7"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tnigt"]
-shader = ExtResource("1_s8wac")
-shader_parameter/size_x = 0.004
-shader_parameter/size_y = 0.006
-
 [sub_resource type="Gradient" id="Gradient_3ob87"]
 offsets = PackedFloat32Array(0.0802395, 0.25988, 0.451497)
 colors = PackedColorArray(0, 0, 0, 1, 0.332004, 0.378679, 0.395652, 0.819608, 0, 0, 0, 1)
@@ -89,6 +84,11 @@ initial_velocity_max = 14.0
 gravity = Vector3(0, 0, 0)
 color_ramp = SubResource("GradientTexture1D_3xelw")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tnigt"]
+shader = ExtResource("1_s8wac")
+shader_parameter/size_x = 0.004
+shader_parameter/size_y = 0.006
+
 [node name="Game" type="Node2D"]
 process_mode = 3
 script = ExtResource("1_lkqmq")
@@ -104,24 +104,6 @@ anchor_mode = 0
 unique_name_in_owner = true
 process_mode = 2
 visible = false
-
-[node name="PixelationCanvas" type="CanvasLayer" parent="Camera"]
-
-[node name="PixelationShader" type="ColorRect" parent="Camera/PixelationCanvas"]
-material = SubResource("ShaderMaterial_tnigt")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="ScanlineCanvas" type="CanvasLayer" parent="Camera"]
-
-[node name="Scanlines" type="Sprite2D" parent="Camera/ScanlineCanvas"]
-self_modulate = Color(0.9, 0.9, 0.9, 0.0980392)
-texture = ExtResource("2_g0317")
-centered = false
 
 [node name="BackgroundCanvas" type="CanvasLayer" parent="Camera"]
 layer = -10
@@ -153,6 +135,24 @@ lifetime = 33.0
 preprocess = 33.0
 randomness = 0.34
 fixed_fps = 60
+
+[node name="PixelationCanvas" type="CanvasLayer" parent="Camera"]
+
+[node name="PixelationShader" type="ColorRect" parent="Camera/PixelationCanvas"]
+material = SubResource("ShaderMaterial_tnigt")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ScanlineCanvas" type="CanvasLayer" parent="Camera"]
+
+[node name="Scanlines" type="Sprite2D" parent="Camera/ScanlineCanvas"]
+self_modulate = Color(0.9, 0.9, 0.9, 0.0980392)
+texture = ExtResource("2_g0317")
+centered = false
 
 [node name="Walls" type="StaticBody2D" parent="."]
 metadata/_edit_group_ = true
