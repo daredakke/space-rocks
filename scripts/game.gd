@@ -101,6 +101,7 @@ func _start_new_game() -> void:
 	
 	player.respawn(player_spawn_point.global_position)
 	score_gain_rate.start()
+	stats.toggle_shot_indicators(player.MAX_SHOTS)
 	rock_spawner.reset()
 	rock_spawner.start_spawning()
 

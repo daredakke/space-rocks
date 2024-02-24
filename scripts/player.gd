@@ -71,6 +71,7 @@ func _process(delta: float) -> void:
 func respawn(pos: Vector2) -> void:
 	is_alive = true
 	global_position = pos
+	_shots_left = MAX_SHOTS
 	
 	set_process(true)
 
