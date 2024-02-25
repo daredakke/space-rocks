@@ -39,7 +39,7 @@ func _ready() -> void:
 
 
 func focus_main_menu() -> void:
-	new_game_button.grab_focus()
+	new_game_button.call_deferred("grab_focus")
 
 
 func _on_new_game_button_pressed() -> void:
