@@ -2,7 +2,7 @@ class_name RockSpawner
 extends Node2D
 
 
-const BASE_ROCK_SPEED: int = 70
+const BASE_ROCK_SPEED: int = 65
 const SPAWN_DELAY: float = 2.0
 const DIFFICULTY_INCREASE_DELAY: float = 6.0
 const SPREAD: int = 15

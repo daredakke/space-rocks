@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=3 uid="uid://bbavpvbayih3"]
+
+[ext_resource type="Texture2D" uid="uid://qhskx1ntx36d" path="res://assets/hatenasoft1-white.png" id="1_1kul4"]
+[ext_resource type="Script" path="res://scripts/splash.gd" id="1_vv2yx"]
+
+[sub_resource type="Animation" id="Animation_qayh2"]
+resource_name = "boiling"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HatenaSoftText:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_o88wl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HatenaSoftText:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5ot8d"]
+_data = {
+"RESET": SubResource("Animation_o88wl"),
+"boiling": SubResource("Animation_qayh2")
+}
+
+[node name="Splash" type="Control"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 150.0
+offset_bottom = 150.0
+script = ExtResource("1_vv2yx")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="HatenaSoftText" type="Sprite2D" parent="."]
+position = Vector2(150, 150)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_1kul4")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_5ot8d")
+}
+
+[node name="SplashTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 2.0
+one_shot = true

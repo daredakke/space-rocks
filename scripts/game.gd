@@ -42,6 +42,7 @@ var _rocks_destroyed: int:
 @onready var pause: Control = %Pause
 @onready var game_over: GameOver = %GameOver
 @onready var fade_out: FadeOut = %FadeOut
+@onready var splash: Splash = %Splash
 @onready var crosshair: Crosshair = %Crosshair
 @onready var player: Player = %Player
 @onready var player_spawn_point: Marker2D = %PlayerSpawnPoint
@@ -58,6 +59,7 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
+	splash.splash_ended.connect(_splash_ended)
 	pause.start_new_game.connect(_start_new_game)
 	pause.continue_game.connect(_continue_game)
 	pause.quit_game.connect(_start_quit_game_delay_timer)
@@ -71,6 +73,10 @@ func _ready() -> void:
 	EventBus.shot_fired.connect(_player_shot_fired)
 	EventBus.shot_reloaded.connect(_player_shot_reloaded)
 	EventBus.player_died.connect(_player_died)
+	
+	# Ensure no sounds play during splash screen
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), true)
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("SFX"), true)
 	
 	rand.randomize()
 	noise.seed = randi()
@@ -114,6 +120,14 @@ func _button_pressed() -> void:
 	audio_bus.play_button_selected()
 
 
+func _splash_ended() -> void:
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), false)
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("SFX"), false)
+	
+	pause.enable_buttons()
+	audio_bus.play_menu_music()
+
+
 func _start_new_game() -> void:
 	_game_started = true
 	_game_paused = false
@@ -126,6 +140,8 @@ func _start_new_game() -> void:
 	crosshair.randomise_rotation()
 	rock_spawner.reset()
 	rock_spawner.start_spawning()
+	audio_bus.play_game_music()
+	audio_bus.stop_menu_music()
 
 
 func _continue_game() -> void:
@@ -146,6 +162,7 @@ func _game_over() -> void:
 	game_over.focus_game_over()
 	DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_VISIBLE)
 	crosshair.hide()
+	audio_bus.play_menu_music()
 
 
 func _handle_pause_state() -> void:

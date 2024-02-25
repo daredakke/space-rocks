@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dty84mckstow5"]
+[gd_scene load_steps=30 format=3 uid="uid://dty84mckstow5"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_lkqmq"]
 [ext_resource type="Shader" path="res://resources/shaders/pixelation.gdshader" id="1_s8wac"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dspdk4av2v2rr" path="res://scenes/player.tscn" id="5_jte11"]
 [ext_resource type="Texture2D" uid="uid://c4e7kni8phy6s" path="res://assets/star-tiny.png" id="5_s2sq7"]
 [ext_resource type="PackedScene" uid="uid://joqcr7kdo5g7" path="res://scenes/fade_out.tscn" id="6_t4dp4"]
+[ext_resource type="PackedScene" uid="uid://bbavpvbayih3" path="res://scenes/splash.tscn" id="7_pcn4e"]
 [ext_resource type="PackedScene" uid="uid://cgdpk1ansxy1f" path="res://scenes/rock_spawner.tscn" id="11_8smje"]
 [ext_resource type="PackedScene" uid="uid://bx4lg1r3jsypf" path="res://scenes/crosshair.tscn" id="11_16cgc"]
 
@@ -124,6 +125,10 @@ visible = false
 
 [node name="FadeOut" parent="Camera/UI" instance=ExtResource("6_t4dp4")]
 unique_name_in_owner = true
+
+[node name="Splash" parent="Camera/UI" instance=ExtResource("7_pcn4e")]
+unique_name_in_owner = true
+process_mode = 3
 
 [node name="BackgroundCanvas" type="CanvasLayer" parent="Camera"]
 layer = -10

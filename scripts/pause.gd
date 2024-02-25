@@ -33,6 +33,7 @@ func _ready() -> void:
 	options_close_button.pressed.connect(_on_options_close_button_pressed)
 	quit_button.pressed.connect(_on_quit_button_pressed)
 	
+	_disable_buttons()
 	continue_button.hide()
 	options.hide()
 	focus_main_menu()
@@ -40,6 +41,18 @@ func _ready() -> void:
 
 func focus_main_menu() -> void:
 	new_game_button.call_deferred("grab_focus")
+
+
+func enable_buttons() -> void:
+	new_game_button.disabled = false
+	options_button.disabled = false
+	quit_button.disabled = false
+
+
+func _disable_buttons() -> void:
+	new_game_button.disabled = true
+	options_button.disabled = true
+	quit_button.disabled = true
 
 
 func _on_new_game_button_pressed() -> void:
