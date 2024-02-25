@@ -143,6 +143,7 @@ func _quit_game() -> void:
 
 func _game_over() -> void:
 	game_over.show()
+	game_over.focus_game_over()
 	DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_VISIBLE)
 	crosshair.hide()
 

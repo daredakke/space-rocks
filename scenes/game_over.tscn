@@ -99,6 +99,7 @@ fit_content = true
 [node name="ButtonsVBox" type="VBoxContainer" parent="Panel/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 8
+theme_override_constants/separation = 8
 
 [node name="RestartButton" type="Button" parent="Panel/MarginContainer/ButtonsVBox"]
 unique_name_in_owner = true
