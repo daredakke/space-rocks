@@ -8,7 +8,7 @@ Made in Godot 4.2.1.
 
 ## Controls
 
-**Movement** - WASD keys / Arrow keys
-**Focused movement** - Shift / Control
-**Fire** - Left and right mouse buttons / Space bar
-**Pause** - Escape
+**Movement** - WASD keys / Arrow keys  
+**Focused movement** - Shift / Control  
+**Fire** - Left and right mouse buttons / Space bar  
+**Pause** - Escape  
