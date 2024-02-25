@@ -2,7 +2,9 @@ class_name Game
 extends Node2D
 
 
-const MAX_SCORE: int = 9999999
+const MAX_SCORE: int = 999999
+const MAX_ROCKS_DESTROYED: int = 99999
+const ROCK_SCORE_VALUE: int = 10
 const NOISE_SHAKE_SPEED: float = 30.0
 const SHAKE_STRENGTH: float = 8.25
 const SHAKE_DECAY_RATE: float = 10
@@ -20,13 +22,19 @@ var _game_paused: bool:
 		_game_paused = new_value
 		_handle_pause_state()
 var _is_fullscreen: bool = false
-var _score: int = 0:
+var _score: int:
 	set(new_value):
 		_score = new_value
 		
 		stats.update_score_label(_score, MAX_SCORE)
+		game_over.update_score_label(_score, MAX_SCORE)
 var _noise_i: float = 0.0
 var _shake_strength: float = 0.0
+var _rocks_destroyed: int:
+	set(new_value):
+		_rocks_destroyed = new_value
+		
+		game_over.update_rocks_destroyed_label(_rocks_destroyed, MAX_ROCKS_DESTROYED)
 
 @onready var audio_bus: AudioBus = %AudioBus
 @onready var camera: Camera2D = %Camera
@@ -59,7 +67,7 @@ func _ready() -> void:
 	score_gain_rate.timeout.connect(_gain_score)
 	game_over_delay.timeout.connect(_game_over)
 	quit_game_delay.timeout.connect(_quit_game)
-	EventBus.rock_destroyed.connect(_gain_score)
+	EventBus.rock_destroyed.connect(_increase_rock_destroyed_count)
 	EventBus.shot_fired.connect(_player_shot_fired)
 	EventBus.shot_reloaded.connect(_player_shot_reloaded)
 	EventBus.player_died.connect(_player_died)
@@ -100,6 +108,7 @@ func _start_new_game() -> void:
 	_game_started = true
 	_game_paused = false
 	_score = 0
+	_rocks_destroyed = 0
 	
 	player.respawn(player_spawn_point.global_position)
 	score_gain_rate.start()
@@ -123,7 +132,6 @@ func _quit_game() -> void:
 
 
 func _game_over() -> void:
-	game_over.update_score_label(_score, MAX_SCORE)
 	game_over.show()
 	DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_VISIBLE)
 	crosshair.hide()
@@ -142,8 +150,13 @@ func _handle_pause_state() -> void:
 		crosshair.show()
 
 
-func _gain_score(value: int = 1) -> void:
-	_score += value
+func _gain_score() -> void:
+	_score += 1
+
+
+func _increase_rock_destroyed_count() -> void:
+	_score += ROCK_SCORE_VALUE
+	_rocks_destroyed += 1
 
 
 func _player_shot_fired(shots_left: int) -> void:

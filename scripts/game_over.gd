@@ -5,7 +5,10 @@ extends Control
 signal restart_game
 signal quit_game
 
-@onready var final_score_label: RichTextLabel = %FinalScoreLabel
+const RIGHT_BB_CODE: String = "[right]"
+
+@onready var final_score_value: RichTextLabel = %FinalScoreValue
+@onready var rocks_destroyed_value: RichTextLabel = %RocksDestroyedValue
 @onready var restart_button: Button = %RestartButton
 @onready var quit_button: Button = %QuitButton
 
@@ -17,7 +20,13 @@ func _ready() -> void:
 
 
 func update_score_label(value: int, max_score: int) -> void:
-	final_score_label.text = "[center]" + Utils.format_integer(clampi(value, 0, max_score))
+	var clamped_value: int = clampi(value, 0, max_score)
+	final_score_value.text = RIGHT_BB_CODE + Utils.format_integer(clamped_value)
+
+
+func update_rocks_destroyed_label(rocks_destroyed: int, max_rocks_destroyed: int) -> void:
+	var clamped_value: int = clampi(rocks_destroyed, 0, max_rocks_destroyed)
+	rocks_destroyed_value.text = RIGHT_BB_CODE + Utils.format_integer(clamped_value)
 
 
 func _on_restart_game_button_pressed() -> void:

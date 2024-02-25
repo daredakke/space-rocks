@@ -14,5 +14,5 @@ func _on_area_entered(area: Area2D) -> void:
 		destroy()
 	
 	if area.is_in_group("enemy"):
-		EventBus.rock_destroyed.emit(10)
+		EventBus.rock_destroyed.emit()
 		destroy()

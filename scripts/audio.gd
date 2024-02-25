@@ -22,7 +22,7 @@ func play_button_selected() -> void:
 	button_selected.play()
 
 
-func _play_rock_destroyed(_score: int) -> void:
+func _play_rock_destroyed() -> void:
 	rock_destroyed.play()
 
 
