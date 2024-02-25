@@ -19,11 +19,11 @@ corner_detail = 4
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xkpnt"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xsfsl"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mppc1"]
+bg_color = Color(0.6, 0.6, 0.6, 0.196078)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jk7gh"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vveho"]
+bg_color = Color(0.6, 0.6, 0.6, 0.196078)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8g3l7"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -45,8 +45,8 @@ Button/styles/pressed = SubResource("StyleBoxFlat_talnf")
 CheckBox/icons/checked = ExtResource("1_npwbg")
 CheckBox/icons/unchecked = ExtResource("2_dfcsi")
 CheckBox/styles/focus = SubResource("StyleBoxFlat_xkpnt")
-CheckBox/styles/hover = SubResource("StyleBoxFlat_xsfsl")
-CheckBox/styles/hover_pressed = SubResource("StyleBoxFlat_jk7gh")
+CheckBox/styles/hover = SubResource("StyleBoxFlat_mppc1")
+CheckBox/styles/hover_pressed = SubResource("StyleBoxFlat_vveho")
 CheckBox/styles/normal = SubResource("StyleBoxFlat_8g3l7")
 CheckBox/styles/pressed = SubResource("StyleBoxFlat_1vmlj")
 CheckButton/styles/normal = SubResource("StyleBoxFlat_t4gse")

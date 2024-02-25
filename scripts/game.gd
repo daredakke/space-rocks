@@ -147,6 +147,7 @@ func _handle_pause_state() -> void:
 	
 	if _game_paused:
 		pause.show()
+		pause.focus_main_menu()
 		DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_VISIBLE)
 		crosshair.hide()
 	else:

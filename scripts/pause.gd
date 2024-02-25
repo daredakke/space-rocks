@@ -35,6 +35,11 @@ func _ready() -> void:
 	
 	continue_button.hide()
 	options.hide()
+	focus_main_menu()
+
+
+func focus_main_menu() -> void:
+	new_game_button.grab_focus()
 
 
 func _on_new_game_button_pressed() -> void:
@@ -48,6 +53,7 @@ func _on_continue_button_pressed() -> void:
 
 func _on_options_button_pressed() -> void:
 	options.show()
+	options_close_button.grab_focus()
 
 
 func _on_music_slider_value_changed(value: float) -> void:
@@ -68,6 +74,7 @@ func _on_fullscreen_toggle_pressed() -> void:
 
 func _on_options_close_button_pressed() -> void:
 	options.hide()
+	focus_main_menu()
 
 
 func _on_quit_button_pressed() -> void:
