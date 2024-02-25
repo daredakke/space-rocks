@@ -97,7 +97,12 @@ func _process(delta: float) -> void:
 
 func _on_node_added(node: Node) -> void:
 	if node is Button:
+		node.mouse_entered.connect(_button_hovered)
 		node.pressed.connect(_button_pressed)
+
+
+func _button_hovered() -> void:
+	audio_bus.play_button_hovered()
 
 
 func _button_pressed() -> void:

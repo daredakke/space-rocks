@@ -213,7 +213,7 @@ process_mode = 1
 [node name="ScoreGainRate" type="Timer" parent="."]
 unique_name_in_owner = true
 process_mode = 1
-wait_time = 0.1
+wait_time = 0.05
 
 [node name="GameOverDelay" type="Timer" parent="."]
 unique_name_in_owner = true

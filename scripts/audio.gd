@@ -6,6 +6,7 @@ extends Node
 @onready var shot_fired: AudioStreamPlayer2D = %ShotFired
 @onready var shot_reloaded: AudioStreamPlayer2D = %ShotReloaded
 @onready var player_died: AudioStreamPlayer2D = %PlayerDied
+@onready var button_hovered: AudioStreamPlayer2D = %ButtonHovered
 @onready var button_selected: AudioStreamPlayer2D = %ButtonSelected
 
 
@@ -20,6 +21,11 @@ func _ready() -> void:
 
 func play_button_selected() -> void:
 	button_selected.play()
+
+
+func play_button_hovered() -> void:
+	if not button_selected.playing:
+		button_hovered.play()
 
 
 func _play_rock_destroyed() -> void:
