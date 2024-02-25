@@ -9,6 +9,7 @@ extends Node
 func _ready() -> void:
 	for i in initial_spawn:
 		var item := node.instantiate() as PoolItem
+		item.visible = false
 		add_child(item, true)
 
 

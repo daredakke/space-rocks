@@ -1,5 +1,5 @@
 class_name RockSpawner
-extends Node
+extends Node2D
 
 
 const BASE_ROCK_SPEED: int = 70
