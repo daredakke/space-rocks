@@ -1,10 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://dspdk4av2v2rr"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_bac0p"]
-[ext_resource type="Texture2D" uid="uid://c4xiyljw7pw5b" path="res://assets/entities/arrow-small.png" id="2_mdfnb"]
 [ext_resource type="Texture2D" uid="uid://bmukxfpddfpcw" path="res://assets/entities/circle-white-24.png" id="3_6n625"]
 [ext_resource type="PackedScene" uid="uid://bsiw6s1tytjnv" path="res://scenes/pool.tscn" id="4_bwlfg"]
 [ext_resource type="PackedScene" uid="uid://b0jb5j5g4ei4v" path="res://scenes/player_bullet.tscn" id="5_av3pv"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6viw3"]
+load_path = "res://.godot/imported/arrow-small.png-ad7dc85e83f3cebc5e6e47111b989bb9.ctex"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wvxxc"]
 radius = 7.0
@@ -21,7 +23,7 @@ modulate = Color(1, 0.0941176, 0.0941176, 1)
 position = Vector2(4, -8.88178e-16)
 rotation = 4.71239
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("2_mdfnb")
+texture = SubResource("CompressedTexture2D_6viw3")
 
 [node name="WallCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_wvxxc")

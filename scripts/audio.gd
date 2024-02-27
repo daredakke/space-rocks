@@ -8,8 +8,8 @@ extends Node
 @onready var player_died: AudioStreamPlayer2D = %PlayerDied
 @onready var button_hovered: AudioStreamPlayer2D = %ButtonHovered
 @onready var button_selected: AudioStreamPlayer2D = %ButtonSelected
-@onready var game_music: AudioStreamPlayer2D = %GameMusic
-@onready var menu_music: AudioStreamPlayer2D = %MenuMusic
+@onready var game_music: AudioStreamPlayer = %GameMusic
+@onready var menu_music: AudioStreamPlayer = %MenuMusic
 
 
 func _ready() -> void:

@@ -6,8 +6,8 @@
 [ext_resource type="AudioStream" uid="uid://bdxli1hs0n13y" path="res://assets/sfx/player-death-1.wav" id="3_drwsj"]
 [ext_resource type="AudioStream" uid="uid://6fba7cwtbf1" path="res://assets/sfx/blip-1.wav" id="4_dqsyu"]
 [ext_resource type="AudioStream" uid="uid://cmj8mv0o2lpak" path="res://assets/sfx/blip-2.wav" id="4_fuosk"]
-[ext_resource type="AudioStream" uid="uid://303bmegkt1de" path="res://assets/music/too close to the sun.wav" id="7_t5ftm"]
-[ext_resource type="AudioStream" uid="uid://dekb7qr23jpii" path="res://assets/music/take off.wav" id="8_pejvm"]
+[ext_resource type="AudioStream" uid="uid://rm8kaf6u8uan" path="res://assets/music/too close to the sun.mp3" id="7_dp7dk"]
+[ext_resource type="AudioStream" uid="uid://by0fitgct6usy" path="res://assets/music/take off.mp3" id="8_qe8jw"]
 
 [node name="AudioBus" type="Node"]
 script = ExtResource("1_s04mm")
@@ -47,12 +47,12 @@ stream = ExtResource("4_dqsyu")
 max_polyphony = 12
 bus = &"SFX"
 
-[node name="GameMusic" type="AudioStreamPlayer2D" parent="."]
+[node name="GameMusic" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("7_t5ftm")
+stream = ExtResource("7_dp7dk")
 bus = &"Music"
 
-[node name="MenuMusic" type="AudioStreamPlayer2D" parent="."]
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("8_pejvm")
+stream = ExtResource("8_qe8jw")
 bus = &"Music"

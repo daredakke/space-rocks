@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://rm8kaf6u8uan"
+path="res://.godot/imported/too close to the sun.mp3-6d773185a9b33b7741e642c0a0dd752a.mp3str"
+
+[deps]
+
+source_file="res://assets/music/too close to the sun.mp3"
+dest_files=["res://.godot/imported/too close to the sun.mp3-6d773185a9b33b7741e642c0a0dd752a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
