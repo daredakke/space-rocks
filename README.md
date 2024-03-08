@@ -1,4 +1,4 @@
-# Space Rocks
+# [Space Rocks](https://hatenasoft.itch.io/space-rocks)
 
 ![Screenshot of Space Rocks gameplay](space-rocks-screenshot.png)
 
